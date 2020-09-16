@@ -1,0 +1,21 @@
+<% if user.favorites.any? %>
+  <ul class="list-unstyled">
+    <% fav_posts.each do |fav| %>
+      <li class="media">
+        <img class="mr-2 rounded" src = "<%= gravatar_url(user, { size: 50 }) %>" alt="">
+        <div class="media-body">
+          <div>
+            <%= fav.user.name %><br>
+            <%= fav.micropost.content %>
+          </div>
+          <div>
+            <%= render 'favorites/favorite_button', micropost: fav.micropost %>
+            <p><%= link_to 'View profile', user_path(user) %></p>
+          </div>
+        </div>
+        
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate fav_posts %>
+<% end %>  
